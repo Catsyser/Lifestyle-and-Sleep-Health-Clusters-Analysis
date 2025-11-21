@@ -1,4 +1,4 @@
-# Lifestyle-and-Sleep-Heath-Clusters-Analysis
+# Lifestyle-and-Sleep-Health-Clusters-Analysis
 
 ## 🌙 Análise de Qualidade do Sono e Estilo de Vida (Clustering)
   
@@ -28,7 +28,7 @@
 
 1. Clone este repositório:
 ```bash
-git clone https://github.com/Catsyser/Lifestyle-and-Sleep-Heath-Clusters-Analysis.git
+git clone https://github.com/Catsyser/Lifestyle-and-Sleep-Health-Clusters-Analysis.git
 ```
 3. Instale as dependências necessárias:
 ```bash
@@ -36,7 +36,7 @@ pip install pandas numpy matplotlib seaborn scikit-learn tabulate
 ```
 4. Execute o script principal:
 ```bash
-python Analise_Sono_KMeans_Export.py
+python final_main_kmeans.py
 ```
 5. Verifique a pasta resultados_projeto/ gerada, que conterá:
 
@@ -57,19 +57,13 @@ O algoritmo identificou **4 perfis principais** (Clusters) nesta população:
 
 ### Visualizações Geradas
 
-**Comparativo de Perfis (Radar Chart):**
-Permite visualizar rapidamente as forças e fraquezas de cada cluster.
+**Comparativo de Perfis (Radar Chart):** Permite visualizar rapidamente as forças e fraquezas de cada cluster.
 
-**Gráfico de Colunas:**
+**Gráfico de Colunas:** Garante uma visualização dos disturbios do sono e IMC.
 
-Garante uma visualização dos disturbios do sono e IMC.
+**Análise PCA:** Visualização da separação matemática dos grupos em 2D.
 
-**Análise PCA:**
-Visualização da separação matemática dos grupos em 2D.
-
-**Tabela de Cluster x Categoria:**
-
-Mostra os valores médios de cada cluster, em cada uma das categorias analisadas.
+**Tabela de Cluster x Categoria:** Mostra os valores médios de cada cluster, em cada uma das categorias analisadas.
 
 ---
 
