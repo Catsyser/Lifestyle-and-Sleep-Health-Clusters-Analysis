@@ -1,4 +1,4 @@
-# Lifestyle-and-Sleep-Heath-Clusters-Analysis
+# Lifestyle-and-Sleep-Health-Clusters-Analysis
 
 ## 🌙 Análise de Qualidade do Sono e Estilo de Vida (Clustering)
   
