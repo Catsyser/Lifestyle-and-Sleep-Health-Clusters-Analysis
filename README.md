@@ -10,8 +10,8 @@
 2. Aplicar Engenharia de Atributos (ex: tratamento de pressão arterial e One-Hot Encoding);
 3. Normalizar dados utilizando StandardScaler;
 4. Encontrar o número ideal de grupos com o Método do Cotovelo (Elbow Method);
-5. Segmentar os dados utilizando o algoritmo K-Means.Visualizar os resultados através de PCA (Redução de Dimensionalidade) e Gráficos de Radar
-6. Gerar relatórios automáticos em Markdown.
+5. Segmentar os dados utilizando o algoritmo K-Means;
+6. Visualizar os resultados através de PCA (Redução de Dimensionalidade), Gráficos de Radar e Gráficos de Colunas.
 
 ## 📊 Dataset
 
@@ -22,7 +22,8 @@
 1. Python (Linguagem principal);
 2. Pandas & Numpy (Manipulação de dados);
 3. Scikit-learn (K-Means, PCA, StandardScaler);
-4. Matplotlib & Seaborn (Visualização de dados)Tabulate (Formatação de tabelas para relatórios).
+4. Matplotlib & Seaborn (Visualização de dados);
+5. Tabulate (Formatação de tabelas para relatórios).
 
 ## 🚀 Como Executar
 
