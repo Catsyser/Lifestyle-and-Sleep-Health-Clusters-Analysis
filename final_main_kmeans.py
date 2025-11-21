@@ -39,8 +39,12 @@ df_raw = pd.read_csv('Sleep_health_and_lifestyle_dataset.csv')
 # --- PASSO 2. Pré-processamento dos dados, separando a pressão arterial em duas colunas --- #
 print("Processando dados...") # Retorno visual do andamento no terminal
 df_processed = df_raw.copy()
-df_processed[['Pressao_Sistolica', 'Pressao_Diastolica']] = df_processed['Blood Pressure'].str.split('/', expand=True).astype(int)
+
+# 2.1 Convertendo Pressão Arterial (String "120/80" -> Int 120 e Int 80)
+df_processed[['Systolic Pressure', 'Diastolic Pressure']] = df_processed['Blood Pressure'].str.split('/', expand=True).astype(int)
 df_processed = df_processed.drop(['Blood Pressure', 'Person ID'], axis=1)
+
+# 2.2 One-Hot Encoding (Transformando Gênero, Profissão, etc. em 0 e 1)
 categorical_cols = ['Gender', 'Occupation', 'BMI Category', 'Sleep Disorder']
 df_processed = pd.get_dummies(df_processed, columns=categorical_cols, drop_first=False)
 final_features = df_processed.columns
@@ -76,8 +80,18 @@ plt.close()
 
 # Gráfico 2: Radar Chart - é um gráfico estilo "teia de aranha" para visualizar os dados
 centroids_scaled = kmeans_final.cluster_centers_
-features_to_plot = ['Age', 'Sleep Duration', 'Quality of Sleep', 'Physical Activity Level', 
-                    'Stress Level', 'Heart Rate', 'Daily Steps']
+features_to_plot = [
+    'Age', 
+    'Sleep Duration', 
+    'Quality of Sleep', 
+    'Physical Activity Level', 
+    'Stress Level', 
+    'Heart Rate', 
+    'Daily Steps',
+    'Systolic Pressure',
+    'Diastolic Pressure'
+]
+
 # Mapear índices
 indices = [list(final_features).index(col) for col in features_to_plot]
 num_vars = len(features_to_plot)
@@ -109,7 +123,31 @@ plt.tight_layout()
 plt.savefig(f"{OUTPUT_DIR}/3_distribuicao_categorias.png")
 plt.close()
 
-# Gráfico 4: PCA - visualizar os clusters encontrados em um gráfico
+# Gráfico 4: Gênero e idade entre os clusters
+fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+sns.countplot(ax=axes[0], data=df_raw, x='Cluster', hue='Gender', palette='pastel')
+axes[0].set_title('Distribuição de Gênero por Cluster')
+sns.barplot(ax=axes[1], data=df_raw, x='Cluster', y='Age', palette='viridis', hue='Cluster', legend=False)
+axes[1].set_title('Média de Idade por Cluster')
+plt.tight_layout()
+plt.savefig(f"{OUTPUT_DIR}/4_genero_idade.png")
+plt.close()
+
+
+# Gráfico 5: Distribuição de profissão
+plt.figure(figsize=(12, 8))
+# Usamos y='Occupation' para fazer barras horizontais (melhor leitura)
+sns.countplot(data=df_raw, y='Occupation', hue='Cluster', palette='viridis')
+plt.title('Profissões por Cluster')
+plt.xlabel('Quantidade')
+plt.ylabel('Profissão')
+plt.legend(title='Cluster', loc='lower right')
+plt.tight_layout()
+plt.savefig(f"{OUTPUT_DIR}/5_profissoes_cluster.png")
+plt.close()
+
+
+# Gráfico 6: PCA - visualizar os clusters encontrados em um gráfico
 pca = PCA(n_components=2)
 data_pca = pca.fit_transform(data_scaled)
 plt.figure(figsize=(10, 7))
@@ -118,7 +156,7 @@ plt.scatter(pca.transform(kmeans_final.cluster_centers_)[:, 0],
             pca.transform(kmeans_final.cluster_centers_)[:, 1], 
             c='red', s=200, marker='X', label='Centroides')
 plt.title('Visualização PCA 2D')
-plt.savefig(f"{OUTPUT_DIR}/4_visualizacao_pca.png")
+plt.savefig(f"{OUTPUT_DIR}/6_visualizacao_pca.png")
 plt.close()
 
 # --- PASSO 6. GERAÇÃO DO RELATÓRIO MARKDOWN --- #
@@ -126,49 +164,54 @@ print("Escrevendo relatório Markdown...") # Retorno visual do andamento no term
 
 numeric_cols = ['Age', 'Sleep Duration', 'Quality of Sleep', 'Physical Activity Level', 
                 'Stress Level', 'Heart Rate', 'Daily Steps']
-medias = df_raw.groupby('Cluster')[numeric_cols].mean().round(2)
+
+df_temp = df_raw.copy()
+df_temp[['Systolic Pressure', 'Diastolic Pressure']] = df_processed[['Systolic Pressure', 'Diastolic Pressure']]
+numeric_cols += ['Systolic Pressure', 'Diastolic Pressure']
+
+medias = df_temp.groupby('Cluster')[numeric_cols].mean().round(2)
 contagem = df_raw['Cluster'].value_counts().sort_index()
 
 md_content = f"""
-# Relatório de Análise de Clusters: Sono e Estilo de Vida
+# Relatório Detalhado: Clustering de Sono e Estilo de Vida
 
-Este relatório apresenta os resultados da segmentação de perfis utilizando o algoritmo K-Means.
+## 1. Visão Geral dos Grupos
+Total de pessoas analisadas: {len(df_raw)}
 
-## 1. Resumo dos Grupos (Clusters)
-
-O algoritmo identificou **{K_IDEAL} perfis distintos** na base de dados.
-
-### Quantidade de Pessoas por Cluster
+### Quantidade por Cluster
 {contagem.to_markdown()}
 
-### Médias das Variáveis por Cluster
-A tabela abaixo mostra o comportamento médio de cada grupo:
+### Estatísticas Médias (Vital + Estilo de Vida)
 {medias.to_markdown()}
 
 ---
 
-## 2. Visualização dos Perfis
+## 2. Análise Demográfica e Social
 
-### Comparativo Geral (Radar Chart)
-O gráfico abaixo permite visualizar as forças e fraquezas de cada perfil (dados normalizados).
-![Radar Chart](2_radar_perfis.png)
+### Quem são essas pessoas? (Gênero)
+Abaixo vemos a divisão entre Homens e Mulheres em cada grupo, bem com a média de faixa etária em cada cluster.
+![Idade](4_genero_idade.png)
 
-### Distribuição de Categorias (Distúrbios e IMC)
-Como os distúrbios do sono e o peso se comportam em cada grupo?
-![Categorias](3_distribuicao_categorias.png)
-
-### Separação dos Grupos (PCA)
-Visualização em 2D da separação matemática dos grupos.
-![PCA](4_visualizacao_pca.png)
+### O que elas fazem? (Profissão)
+Distribuição das ocupações profissionais dentro de cada cluster.
+![Profissão](5_profissoes_cluster.png)
 
 ---
 
-## 3. Metodologia
-- **Algoritmo:** K-Means Clustering
-- **K Ideal:** {K_IDEAL} (definido pelo Método do Cotovelo)
-- **Pré-processamento:** Padronização Z-Score e One-Hot Encoding para variáveis categóricas.
+## 3. Análise de Saúde e Sono
 
-*Relatório gerado automaticamente.*
+### Perfil Geral (Radar Chart)
+Comparativo visual das variáveis numéricas normalizadas.
+![Radar](1_radar_perfis.png)
+
+### Riscos de Saúde (Distúrbios e IMC)
+Relação entre peso e distúrbios do sono.
+![Saúde](6_categorias_saude.png)
+
+### Separação Matemática (PCA)
+![PCA](6_pca.png)
+
+*Gerado em {pd.Timestamp.now().strftime('%d/%m/%Y')}*
 """
 
 with open(f"{OUTPUT_DIR}/relatorio_analise.md", "w", encoding="utf-8") as f:
