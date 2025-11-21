@@ -61,4 +61,5 @@ Relação entre peso e distúrbios do sono.
 - **Algoritmo:** K-Means Clustering
 - **K Ideal:** 4 (definido pelo Método do Cotovelo - confira saída nos arquivos)
 - **Pré-processamento:** Padronização Z-Score e One-Hot Encoding para variáveis categóricas.
+
 *Gerado em 21/11/2025*
