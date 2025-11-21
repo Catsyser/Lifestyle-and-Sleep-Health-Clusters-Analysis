@@ -38,4 +38,35 @@
   
 ## 📈 Resultados e Insights
 
-  O algoritmo identificou 4 perfis principais (Clusters) nesta população: ClusterPerfil SugeridoCaracterísticas Marcantes0Os SaudáveisBaixo estresse, IMC normal, ótima qualidade de sono.1Ativos com RiscoAlta atividade física, mas presença marcante de Apneia do Sono.2Jovens NormaisGrupo majoritário, jovens com bons indicadores gerais.3Grupo de AlertaSedentários, alto estresse, sobrepeso e forte presença de Insônia.Visualizações Geradas(Exemplos de gráficos gerados pelo script)Comparativo de Perfis (Radar Chart):Permite visualizar rapidamente as forças e fraquezas de cada cluster.Análise PCA:Visualização da separação matemática dos grupos em 2D.Desenvolvido para fins de estudo em Data Science e Machine Learning.
+  O algoritmo identificou 4 perfis principais (Clusters) nesta população:
+
+Cluster
+
+Perfil Sugerido
+
+Características Marcantes
+
+0
+
+Os Saudáveis
+
+Baixo estresse, IMC normal, ótima qualidade de sono.
+
+1
+
+Ativos com Risco
+
+Alta atividade física, mas presença marcante de Apneia do Sono.
+
+2
+
+Jovens Normais
+
+Grupo majoritário, jovens com bons indicadores gerais.
+
+3
+
+Grupo de Alerta
+
+Sedentários, alto estresse, sobrepeso e forte presença de Insônia.
+  Visualizações Geradas(Exemplos de gráficos gerados pelo script)Comparativo de Perfis (Radar Chart):Permite visualizar rapidamente as forças e fraquezas de cada cluster.Análise PCA:Visualização da separação matemática dos grupos em 2D.Desenvolvido para fins de estudo em Data Science e Machine Learning.
