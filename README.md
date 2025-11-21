@@ -36,7 +36,7 @@ pip install pandas numpy matplotlib seaborn scikit-learn tabulate
 ```
 4. Execute o script principal:
 ```bash
-python Analise_Sono_KMeans_Export.py
+python final_main_kmeans.py
 ```
 5. Verifique a pasta resultados_projeto/ gerada, que conterá:
 
