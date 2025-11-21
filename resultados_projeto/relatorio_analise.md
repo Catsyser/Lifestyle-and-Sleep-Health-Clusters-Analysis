@@ -24,12 +24,16 @@ Total de pessoas analisadas: 374
 
 ## 2. Análise Demográfica e Social
 
-### Quem são essas pessoas? (Gênero)
+### Quem são essas pessoas?
+
 Abaixo vemos a divisão entre Homens e Mulheres em cada grupo, bem com a média de faixa etária em cada cluster.
+
 ![Idade](4_genero_idade.png)
 
 ### O que elas fazem? (Profissão)
+
 Distribuição das ocupações profissionais dentro de cada cluster.
+
 ![Profissão](5_profissoes_cluster.png)
 
 ---
@@ -37,14 +41,24 @@ Distribuição das ocupações profissionais dentro de cada cluster.
 ## 3. Análise de Saúde e Sono
 
 ### Perfil Geral (Radar Chart)
+
 Comparativo visual das variáveis numéricas normalizadas.
-![Radar](1_radar_perfis.png)
+
+![Radar](2_radar_perfis.png)
 
 ### Riscos de Saúde (Distúrbios e IMC)
+
 Relação entre peso e distúrbios do sono.
-![Saúde](6_categorias_saude.png)
+
+![Saúde](3_distribuicao_categorias.png)
 
 ### Separação Matemática (PCA)
-![PCA](6_pca.png)
 
+![PCA](6_visualizacao_pca.png)
+
+---
+## 3. Metodologia
+- **Algoritmo:** K-Means Clustering
+- **K Ideal:** 4 (definido pelo Método do Cotovelo - confira saída nos arquivos)
+- **Pré-processamento:** Padronização Z-Score e One-Hot Encoding para variáveis categóricas.
 *Gerado em 21/11/2025*
