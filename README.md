@@ -2,7 +2,7 @@
 
 ## 🌙 Análise de Qualidade do Sono e Estilo de Vida (Clustering)
   
-  Este projeto aplica técnicas de *Machine Learning Não Supervisionado* para identificar padrões comportamentais e de saúde em dados de qualidade do sono e estilo de vida. O objetivo principal foi utilizar o algoritmo *K-Means* para segmentar indivíduos em grupos (clusters) baseados em seus hábitos, permitindo inferir perfis de risco e estilos de vida sem a necessidade de rótulos prévios.
+  Este projeto aplica técnicas de **Machine Learning Não Supervisionado** para identificar padrões comportamentais e de saúde em dados de qualidade do sono e estilo de vida. O objetivo principal foi utilizar o algoritmo **K-Means** para segmentar indivíduos em grupos (clusters) baseados em seus hábitos, permitindo inferir perfis de risco e estilos de vida sem a necessidade de rótulos prévios.
 
 ## 🎯 Objetivos do Projeto
 
@@ -27,46 +27,50 @@
 ## 🚀 Como Executar
 
 1. Clone este repositório:
-```git clone ESTEREPOSITÓRIO```
+```bash
+git clone [https://github.com/SEU_USUARIO/analise-sono-clustering.git](https://github.com/SEU_USUARIO/analise-sono-clustering.git)
+```
 3. Instale as dependências necessárias:
-```pip install pandas numpy matplotlib seaborn scikit-learn tabulate```
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn tabulate
+```
 4. Execute o script principal:
-```python final_main_kmeans.py```
+```bash
+python Analise_Sono_KMeans_Export.py
+```
 5. Verifique a pasta resultados_projeto/ gerada, que conterá:
-  4.1 relatorio_analise.md: Relatório completo com os insights.
-  4.2 Imagens (.png) com os gráficos gerados.
+
+5.1 relatorio_analise.md: Relatório completo com os insights.
+
+5.2 Imagens (.png) com os gráficos gerados.
   
 ## 📈 Resultados e Insights
 
-  O algoritmo identificou 4 perfis principais (Clusters) nesta população:
+O algoritmo identificou **4 perfis principais** (Clusters) nesta população:
 
-Cluster
+| Cluster | Perfil Sugerido | Características Marcantes |
+| :--- | :--- | :--- |
+| **0** | **Os Saudáveis** | Baixo estresse, IMC normal, ótima qualidade de sono. |
+| **1** | **Ativos com Risco** | Alta atividade física, mas presença marcante de Apneia do Sono. |
+| **2** | **Jovens Normais** | Grupo majoritário, jovens com bons indicadores gerais. |
+| **3** | **Grupo de Alerta** | Sedentários, alto estresse, sobrepeso e forte presença de Insônia. |
 
-Perfil Sugerido
+### Visualizações Geradas
 
-Características Marcantes
+**Comparativo de Perfis (Radar Chart):**
+Permite visualizar rapidamente as forças e fraquezas de cada cluster.
 
-0
+** Gráfico de Colunas:**
 
-Os Saudáveis
+Garante uma visualização dos disturbios do sono e IMC.
 
-Baixo estresse, IMC normal, ótima qualidade de sono.
+**Análise PCA:**
+Visualização da separação matemática dos grupos em 2D.
 
-1
+**Tabela de Cluster x Categoria:**
 
-Ativos com Risco
+Mostra os valores médios de cada cluster, em cada uma das categorias analisadas.
 
-Alta atividade física, mas presença marcante de Apneia do Sono.
+---
 
-2
-
-Jovens Normais
-
-Grupo majoritário, jovens com bons indicadores gerais.
-
-3
-
-Grupo de Alerta
-
-Sedentários, alto estresse, sobrepeso e forte presença de Insônia.
-  Visualizações Geradas(Exemplos de gráficos gerados pelo script)Comparativo de Perfis (Radar Chart):Permite visualizar rapidamente as forças e fraquezas de cada cluster.Análise PCA:Visualização da separação matemática dos grupos em 2D.Desenvolvido para fins de estudo em Data Science e Machine Learning.
+Desenvolvido para fins de estudo em Data Science e Machine Learning, para a disciplina de Inteligência Artificial na Universidade Federal do ABC (UFABC)
